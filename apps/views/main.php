@@ -55,7 +55,7 @@
     <?php while($row = $data['workers']->fetch()): ?>
           namesOfMaster.push('<?=$row['worker'];?>');
     <?php endwhile ?>
-    console.log(namesOfMaster);
+
   </script>       
 
   <div id="columnchart_values" style="width: 90%; height: 300px; margin: 0 auto;"></div>
@@ -65,7 +65,7 @@
         <th>Рейтинг</th>
 		    <th>Место</th>
       </tr>	  
-      <?php	while($row = $data['ratings']->fetch()){
+      <?php	while($row = $data['ratings_last_month']->fetch()){
         echo "<tr><td>".$row['worker'].
             "</td> <td>Рейтинг: ".$row['rating']."</td><td>Место: ".$row['place']."</td></tr>";
       }
@@ -95,8 +95,8 @@
     };    
     var data = google.visualization.arrayToDataTable([
       ["Веб-мастер", "Рейтинг", { role: "style" } ],
-      <?php $data['ratings']->reset_pointer(); 
-        while($row = $data['ratings']->fetch() ){
+      <?php $data['ratings_last_month']->reset_pointer(); 
+        while($row = $data['ratings_last_month']->fetch() ){
           echo "['".$row['worker']."', ".$row['rating'].", colorRatting(".$row['rating'].")],";
         }
       ?>     
@@ -137,13 +137,27 @@ function drawChart() {
     });   
 
   data.addRows([
-    [new Date(2019, 0),  null, null, null, 93, 51, null, 70, 70, 81, null, 30, 42, null],
-    [new Date(2019, 1),  null, null, null, 96, 72, null, 66, 74, 76, null, 23, 49, 37],
-    [new Date(2019, 2),  null, null, null, 92, 71, null, 65, 71, 87, null, 61, 58, 32],
-    [new Date(2019, 3),  null, 84, 75, 94, 64, 66, 81, 82, 79, 47, 54, 49, 40],
-    [new Date(2019, 4),  47, 64, 88, 91, 56, null, 69, 80, 75, 43, 66, 45, 51]
-                
-  ]);  
+    <?php for($i = 0; $i < 12; $i++): ?>
+      [new Date(<?=(int)"20".date('y')?>, <?=$i?>),
+        <?php $data['workers']->reset_pointer();?>
+
+        <?php while($row_worker = $data['workers']->fetch() ): ?>
+            <?php $data['ratings'][$i]->reset_pointer();$check = false; ?>
+
+            <?php while($row_rating = $data['ratings'][$i]->fetch() ): ?>
+                <?php if($row_rating['worker'] == $row_worker['worker']): ?>
+                    <?=$row_rating['rating']?>,
+                    <?php $check = true; break;?>
+                <?php endif ?>
+            <?php endwhile ?>
+            
+            <?php if(!$check): ?>
+                null,
+            <?php endif ?>
+        <?php endwhile ?>
+      ],
+     <?php endfor ?>
+  ]);
 
   var options = {
     chart: {
