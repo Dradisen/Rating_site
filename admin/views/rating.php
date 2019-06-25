@@ -66,7 +66,7 @@
       <th scope="col">Месяц</th>
       <th scope="col">Год</th>
       <th scope="col">Рейтинг</th>
-      <th scope="col" class="col-sm-3 text-center">Редактировать/Удалить</th>
+      <th scope="col" class="text-center">Редактировать/Удалить</th>
     </tr>
 
     <tr>

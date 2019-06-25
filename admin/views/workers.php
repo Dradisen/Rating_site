@@ -82,7 +82,7 @@
       <th scope="col">#</th>
       <th scope="col">Фамилия имя</th>
       <th scope="col">Должность</th>
-      <th scope="col" class="col-sm-3 text-center">Редактировать/Удалить</th>
+      <th scope="col" class="text-center">Редактировать/Удалить</th>
     </tr>
   </thead>
 
