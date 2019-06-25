@@ -137,7 +137,7 @@ function drawChart() {
     });   
 
   data.addRows([
-    <?php for($i = 0; $i < 12; $i++): ?>
+    <?php for($i = 0; $i < (int)date('m'); $i++): ?>
       [new Date(<?=(int)"20".date('y')?>, <?=$i?>),
         <?php $data['workers']->reset_pointer();?>
 
