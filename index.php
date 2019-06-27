@@ -1,5 +1,6 @@
 <?php
 
+//Запускаем setting натсройки
 if(file_exists('setting/setting_prod.php')){
    $setting = include_once('setting/setting_prod.php');
 }else if(file_exists('setting/setting_dev.php')){
@@ -12,12 +13,13 @@ if(file_exists('setting/setting_prod.php')){
 
 $route = explode('?', $_SERVER['REQUEST_URI']);
 
-//Основные приложения. 
+//Роутинг основных приложений. 
 $url_pattern = array(
     'admin' => "admin/index.php",
     '.*'=> 'apps/index.php',
 );
 
+//Запускаем роутинг
 $search_url = false;
 foreach($url_pattern as $key => $val){
     if(preg_match("@^/".$key."[/]{0,1}@i", $route[0], $matches)){
