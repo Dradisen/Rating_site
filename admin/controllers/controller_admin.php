@@ -252,7 +252,7 @@ class Controller_admin extends Controller{
 // url: admin/logout
     function action_logout(){
         unset($_SESSION['user']);
-        return Header('Location: /admin');
+        return Header('Location: /');
     }
 
 //--------------------------------------------------
@@ -261,7 +261,7 @@ class Controller_admin extends Controller{
         if($_SESSION['user'] == 'admin'){
             return true;
         }else{
-            return Header("Location: /");
+            return Header("Location: /admin/login");
         }
     }
 
