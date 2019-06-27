@@ -19,6 +19,7 @@ $url_pattern = array(
     '.*'=> 'apps/index.php',
 );
 
+
 //Запускаем роутинг
 $search_url = false;
 foreach($url_pattern as $key => $val){
