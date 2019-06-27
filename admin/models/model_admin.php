@@ -1,7 +1,9 @@
 <?php
 
+//Модель админки
 class Model_Admin extends Model{
 
+    //Пойск юзера в бд
     function getUser($name, $password){
         $name = strip_tags($name);
         

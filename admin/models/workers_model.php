@@ -1,6 +1,7 @@
 <?php
 class Model_Workers extends Model{
 
+    //Запрос работников
     function get_data(){
         $STH = $this->DBH->prepare("SELECT * FROM workers");
         $STH->execute();
@@ -9,6 +10,7 @@ class Model_Workers extends Model{
         
     }
 
+    //Запрос работника по id
     function get_id($id=null){
         $STH = $this->DBH->prepare("SELECT * FROM workers WHERE id=:id");
         $STH->execute(array('id'=> (int)$id));
@@ -22,7 +24,7 @@ class Model_Workers extends Model{
         
     }
 
-
+    //Создание работника
     function create($data){
         $name = strip_tags($data['name']);
         $position = strip_tags($data['position']);
@@ -39,6 +41,7 @@ class Model_Workers extends Model{
         return ($result) ? true : false;
     }
 
+    //Редактирование работника
     function edit($data){
 
         $id = (int)$data['id'];
@@ -61,6 +64,7 @@ class Model_Workers extends Model{
 
     }
 
+    //Удаление работника
     function delete($id){
         $STH = $this->DBH->prepare("DELETE FROM workers WHERE id= :id");
         $result = $STH->execute(array('id'=> (int)$id));
@@ -71,7 +75,7 @@ class Model_Workers extends Model{
         return ($result) ? true : false;
     }
 
-
+    //Вывод запроса
     function all(){
         return new QueryObjects($this->queries);
     }

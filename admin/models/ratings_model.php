@@ -51,7 +51,7 @@ class Model_Ratings extends Model{
         return $this;
     }
 
-
+    //Запрос рейтинга за последний существующий месяц в бд.
     function get_data_last_month(){
         $query = "SELECT *, MONTH(date) as month FROM ratings ORDER BY date DESC, rating DESC";
         $STH = $this->DBH->prepare($query);
@@ -91,6 +91,7 @@ class Model_Ratings extends Model{
         return $this;
     }
 
+    //Запрос рейтинга первых трёх победителей.
     function filter_top_place(){
         $place = 0;
         $result = [];
@@ -135,7 +136,7 @@ class Model_Ratings extends Model{
         return $this;
     }
 
-    //Создание
+    //Создание рейтинга
     function create($data){
         $date_year = (int)$data['date_year'];
         $date_month = (int)$data['date_month'];
@@ -162,7 +163,7 @@ class Model_Ratings extends Model{
 
     }
 
-    //Редактирование
+    //Редактирование рейтинга
     function edit($data){
         $fk= (int)$data['id'];
         $date_year = (int)$data['date_year'];
@@ -179,6 +180,7 @@ class Model_Ratings extends Model{
         return ($result) ? true : false;
     }
 
+    //Подсчет среднего рейтинга за всё время.
     function avg_rating(){
         $STH = $this->DBH->prepare("SELECT AVG(rating) as avg FROM ratings");
         $STH->execute();
@@ -186,6 +188,7 @@ class Model_Ratings extends Model{
         return (int)$STH->fetch()['avg'];
     }
 
+    //Удаление рейтинга.
     function delete($id){
         $STH = $this->DBH->prepare("DELETE FROM ratings WHERE id= :id");
         $result = $STH->execute(array('id'=> (int)$id));
