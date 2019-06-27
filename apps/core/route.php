@@ -1,5 +1,6 @@
 <?php
 
+//Роутер основного приложения сайта
 class Route{
 
     static function start(){
