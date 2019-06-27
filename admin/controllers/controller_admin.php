@@ -21,6 +21,8 @@ class Controller_admin extends Controller{
         12 => "Декабрь",
     );
 
+//--------------------------------------------------
+//Объявление класса моделей и представления.
     function __construct(){
         $this->model = new Model_Admin();
         $this->model_workers = new Model_Workers();
@@ -28,12 +30,15 @@ class Controller_admin extends Controller{
         $this->view = new View();
     }
 
-    //Главный контроллер входа
+//--------------------------------------------------
+//Главный контроллер входа
     function action_index(){
         $this->isAuth();
         return Header("Location: /admin/workers");
     }
 
+//--------------------------------------------------
+// url: admin/workers
     function action_workers(){
         $this->isAuth();
 
@@ -50,6 +55,8 @@ class Controller_admin extends Controller{
         return $this->view->render('workers.php','base_template.php', $data); 
     }
 
+//--------------------------------------------------
+// url: admin/workers/add
     function action_workers_add($url_data){
         $this->isAuth();
 
@@ -67,7 +74,9 @@ class Controller_admin extends Controller{
         }
         return $this->view->render('workers_add.php', 'base_template.php');
     }
-
+    
+//--------------------------------------------------
+// url: admin/workers/edit/[int]
     function action_workers_edit($url_data){
         $this->isAuth();
 
@@ -97,6 +106,8 @@ class Controller_admin extends Controller{
         return $this->view->render('workers_edit.php', 'base_template.php', $data);
     }
 
+//--------------------------------------------------
+// url: admin/workers/delete/[int]
     function action_workers_delete($url_data){
         $this->isAuth();
 
@@ -106,7 +117,8 @@ class Controller_admin extends Controller{
         return Header("Location: /admin/workers");
     }
 
-
+//--------------------------------------------------
+// url: admin/rating
     function action_rating(){
         $this->isAuth();
 
@@ -124,6 +136,8 @@ class Controller_admin extends Controller{
         return $this->view->render('rating.php','base_template.php', $data); 
     }
 
+//--------------------------------------------------
+// url: admin/rating/edit/[int]
     function action_rating_edit($url_data){
         $this->isAuth();
 
@@ -162,6 +176,8 @@ class Controller_admin extends Controller{
         return $this->view->render('rating_edit.php', 'base_template.php', $data);
     }
 
+//--------------------------------------------------
+// url: admin/rating/add
     function action_rating_add($url_data){
         $this->isAuth();
 
@@ -196,6 +212,8 @@ class Controller_admin extends Controller{
 
     }
 
+//--------------------------------------------------
+// url: admin/rating/api
     function action_rating_api($url_data){
         $this->isAuth();
 
@@ -204,6 +222,8 @@ class Controller_admin extends Controller{
 
     }
 
+//--------------------------------------------------
+// url: admin/rating/delete/[int]
     function action_rating_delete($url_data){
         $this->isAuth();
 
@@ -213,7 +233,8 @@ class Controller_admin extends Controller{
         return Header("Location: /admin/rating");
     }
 
-
+//--------------------------------------------------
+// url: admin/login
     function action_login(){
 
         if(isset($_POST['login'], $_POST['password'])){
@@ -227,22 +248,23 @@ class Controller_admin extends Controller{
         return $this->view->render('','login.php');
     }
 
+//--------------------------------------------------
+// url: admin/logout
     function action_logout(){
         unset($_SESSION['user']);
         return Header('Location: /admin');
     }
 
+//--------------------------------------------------
+//Проверка авторизации
     function isAuth(){
         if($_SESSION['user'] == 'admin'){
             return true;
         }else{
-            return Header("Location: /admin/login");
+            return Header("Location: /");
         }
     }
 
-    function error_page(){
-        return $this->view->render('404.php','base_template.php');
-    }
 }
 
 ?>
