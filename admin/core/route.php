@@ -1,9 +1,11 @@
 <?php
 
+//Роутер админки
 class Route{
 
     static function start(){
 
+        //Основные адреса ["Вызывающий контроллер" => "Адрес"]
         $url_pattern = array(
             "index" => "admin",
             "workers" => "admin/workers",
@@ -19,11 +21,12 @@ class Route{
             "logout" => "admin/logout",
         );
 
-        //Имя приложения(имя контроллера) и вызывающий его контроллер
+        //Имя приложения(имя контроллера) и основной вызывающий его контроллер
         $controller_name = "Admin";
         $action_name = "index";
         $routes = explode('?', $_SERVER['REQUEST_URI']);
 
+        //Старт роутинга
         $search_url = false;
         foreach($url_pattern as $key => $val){
             if(preg_match("@^/".$val."[/]{0,1}$@i", $routes[0], $matches)){
@@ -42,12 +45,10 @@ class Route{
         $controller_name = "Controller_".$controller_name;
         $action_name = "action_".$action_name;
 
-        //var_dump($model_name, $controller_name, $action_name);
         
         $model_file = strtolower($model_name).".php";
         $model_path = $_SERVER['DOCUMENT_ROOT']."/admin/models/".$model_file;
         
-        //dump($model_path);
         if( file_exists($model_path) ){
             include $model_path;
         }
@@ -55,9 +56,6 @@ class Route{
         $controller_file = strtolower($controller_name).".php";
         $controller_path = $_SERVER['DOCUMENT_ROOT'].
                             "/admin/controllers/".$controller_file;
-
-        //dump($_SERVER['DOCUMENT_ROOT'].$controller_path);
-        //dump($_SERVER);
 
         if( file_exists($controller_path) ){
             include $controller_path;

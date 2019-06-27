@@ -1,5 +1,5 @@
 <?php
-
+//Базовый класс контроллера
 class Controller{
 
     public $view;

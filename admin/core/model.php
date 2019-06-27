@@ -1,5 +1,5 @@
 <?php
-
+//Базовый класс модели
 class Model{
 
     public $DBH = null;
@@ -30,10 +30,8 @@ class Model{
     }
 }
 
-/*
-Класс для удобного вывода запросов.
-*/
 
+//Класс для удобного вывода запросов.
 class QueryObjects{
     private $data = null;
     private $pointer = null;
