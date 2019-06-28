@@ -234,6 +234,52 @@ class Controller_admin extends Controller{
     }
 
 //--------------------------------------------------
+//Форма регистрации
+    function action_registration(){
+
+        if(isset($_POST['login'], $_POST['password'], $_POST['again_password'])&&
+            ($_POST['login']&&$_POST['password']&&$_POST['again_password']) != ""){
+            
+            if($_POST['password'] != $_POST['again_password']){
+                $data['error'] = "Пароль не совпадает!";
+                return $this->view->render('','register.php', $data);
+            }
+            
+            $query_data = array(
+                'name'=> $_POST['login'],
+                'password'=> $_POST['password']
+            );
+            $res = $this->model->registrate($query_data);
+
+            if($res){
+                return Header('Location: /admin/login');
+            }else{
+                $data['error'] = "Суперпользователь уже существует! Обратитесь к нему за помощью,
+                                    если хотите получить права.";
+                return $this->view->render('','register.php', $data);
+            }
+        }
+
+        return $this->view->render('','register.php');
+    }
+
+//--------------------------------------------------
+// url: admin/user/add
+    function action_user_add(){
+        $this->isAuth();
+
+        if(isset($_POST['login'], $_POST['password'])&&
+            ($_POST['login']&&$_POST['password'])!= ""){
+            
+            $data['query'] = $this->model->addUser(array('name'=>$_POST['login'],
+                                        'password'=>$_POST['password']));
+            return $this->view->render('user_add.php','base_template.php', $data);
+        }
+
+        return $this->view->render('user_add.php','base_template.php');
+    }
+
+//--------------------------------------------------
 // url: admin/login
     function action_login(){
 
@@ -258,7 +304,8 @@ class Controller_admin extends Controller{
 //--------------------------------------------------
 //Проверка авторизации
     function isAuth(){
-        if($_SESSION['user'] == 'admin'){
+        
+        if(isset($_SESSION['user'])){
             return true;
         }else{
             return Header("Location: /admin/login");

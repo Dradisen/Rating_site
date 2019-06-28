@@ -120,7 +120,11 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="logout" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="/admin/user/add">
+                  <i class="fas fa-address-book fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Создать пользователя
+                </a>
+                <a class="dropdown-item" href="/admin/logout" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Покинуть
                 </a>
@@ -176,7 +180,7 @@
         <div class="modal-body">Нажмите "Покинуть", чтобы завершить сессию.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Отмена</button>
-          <a class="btn btn-primary" href="logout">Покинуть</a>
+          <a class="btn btn-primary" href="/admin/logout">Покинуть</a>
         </div>
       </div>
     </div>

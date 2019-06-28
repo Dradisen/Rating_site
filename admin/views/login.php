@@ -59,13 +59,6 @@
                              name="password">
                     </div>
 
-                    <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Запомнить</label>
-                      </div>
-                    </div>
-
                     <button type="submit" class="btn btn-primary btn-user btn-block">
                       Войти
                     </button>
@@ -82,10 +75,7 @@
 
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                  </div>
-                  <div class="text-center">
-                    <a class="small" href="register.html">Create an Account!</a>
+                    <a class="small" href="/admin/registration">Создать аккаунт!</a>
                   </div>
                 </div>
               </div>

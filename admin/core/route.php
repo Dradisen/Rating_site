@@ -17,7 +17,9 @@ class Route{
             "rating_api" => "admin/rating/api",
             "rating_edit" => "admin/rating/edit/(?P<id>[0-9]+)",
             "rating_delete" => "admin/rating/delete/(?P<id>[0-9]+)",
-            "login" => "admin/login",
+            "registration" => "admin/registration",
+            "user_add" => "admin/user/add",
+            "login" => "admin/login", 
             "logout" => "admin/logout",
         );
 
