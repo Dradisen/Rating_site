@@ -109,9 +109,11 @@
                        type: "string",
                        role: "annotation" },
                      2]);
+    <?php $data['ratings_last_month']->reset_pointer(); ?>
+    <?php $row = $data['ratings_last_month']->fetch(); ?>
 
     var options = {
-      title: "Рейтинг за май 2019",      
+      title: "Рейтинг за " + " <?php echo $data['month'][$row['month']]; ?> месяц" ,      
       height: 400,
       bar: {groupWidth: "95%"},
       legend: { position: "none" },

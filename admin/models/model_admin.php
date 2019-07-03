@@ -47,8 +47,8 @@ class Model_Admin extends Model{
             return false;
         }
 
-        $this->addUser($data);
-        return true;
+        return $this->addUser($data);
+        
 
     }
 
