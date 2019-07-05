@@ -49,7 +49,7 @@ class Controller_admin extends Controller{
         $data['workers'] = $this->model_workers->get_data()->all();
         $data['ratings'] = $this->model_ratings->get_data_last_month()->all();
         $data['places'] = $this->model_ratings->get_data_last_month()->filter_top_place();
-        $data['avg'] = $this->model_ratings->avg_rating();
+        $data['avg'] = $this->model_ratings->avg_rating_last_month();
         $data['months'] = $this->months;
 
         return $this->view->render('workers.php','base_template.php', $data); 

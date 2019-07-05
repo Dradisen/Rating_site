@@ -188,6 +188,22 @@ class Model_Ratings extends Model{
         return (int)$STH->fetch()['avg'];
     }
 
+    function avg_rating_last_month(){
+        $STH = $this->DBH->prepare("SELECT MONTH(date) as month, YEAR(date) as year
+                                    FROM ratings ORDER BY date DESC");
+        $STH->execute();
+        $row = $STH->fetch();
+
+        $month = $row['month'];
+        $year = $row['year'];
+
+        $STH = $this->DBH->prepare("SELECT AVG(rating) as avg FROM ratings
+                                    WHERE MONTH(date)=$month AND YEAR(date)=$year");
+        $STH->execute();
+        $row = $STH->fetch();
+        return $row['avg'];
+    }
+
     //Удаление рейтинга.
     function delete($id){
         $STH = $this->DBH->prepare("DELETE FROM ratings WHERE id= :id");
