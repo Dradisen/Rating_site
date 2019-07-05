@@ -201,7 +201,7 @@ class Model_Ratings extends Model{
                                     WHERE MONTH(date)=$month AND YEAR(date)=$year");
         $STH->execute();
         $row = $STH->fetch();
-        return $row['avg'];
+        return (int)($row['avg'] * 100)/100;
     }
 
     //Удаление рейтинга.
